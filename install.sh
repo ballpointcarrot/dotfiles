@@ -6,7 +6,7 @@ dir=$HOME/.dotfiles
 cd $HOME
 
 printf "\nCloning dotfiles..."
-#git clone https://github.com/ballpointcarrot/dotfiles.git $dir
+git clone https://github.com/ballpointcarrot/dotfiles.git $dir
 
 printf "\n\nInstalling Oh My ZSH...\n"
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh > /dev/null 2>&1
