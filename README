@@ -1,0 +1,3 @@
+Install via the following command:
+
+curl -L https://github.com/ballpointcarrot/dotfiles/raw/master/install.sh | sh
