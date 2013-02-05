@@ -1,0 +1,19 @@
+[user]
+	name = Christopher Kruse
+	email = kruse.christopher@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	editor = nano
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%Cgreen%h%Creset %ad | %s%d %Cblue[%an]%Creset \" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+[push]
+	default = current
