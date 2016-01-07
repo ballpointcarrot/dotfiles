@@ -21,6 +21,27 @@ if [ -d $HOME/.vim ]; then
 	mv $HOME/.vimrc $HOME/.vim_backup/vimrc_backup
 fi
 
+printf "\n\nInstalling Emacs configuration..."
+if [ -d $HOME/.emacs.d ]; then
+    echo "Back up existing Emacs config."
+    if [ -d $HOME/.emacs.d.backup ]; then
+	rm -rf $HOME/.emacs.d.backup
+    fi
+
+    mv $HOME/.emacs.d $HOME/.emacs.d.backup
+    mkdir $HOME/.emacs.d
+    ln -s $dir/.emacs.d/* $HOME/.emacs.d/
+
+    if grep -q "not found" <<< $(which cask); then
+	printf "Cask not found - please install Cask and re-run to finish Emacs config install."
+    else
+	printf "Running 'cask install' in emacs directory."
+	current=$(pwd)
+	cd $HOME/.emacs.d; cask install
+	cd $current
+    fi     
+fi
+
 printf "\n\nInstalling ballpointcarrot's vim config..."
 git clone https://github.com/ballpointcarrot/vim-config.git $HOME/.vim > /dev/null 2>&1
 printf "\nUpdating bundled plugins..."
@@ -30,24 +51,24 @@ ln -s $HOME/.vim/vimrc .vimrc
 
 printf "\nInstalling fresh dotfiles...\n"
 if [ -f $HOME/.gitconfig ]; then 
-	echo "backing up old gitconfig..."
-	mv $HOME/.gitconfig $HOME/.gitconfig_backup
+    echo "backing up old gitconfig..."
+    mv $HOME/.gitconfig $HOME/.gitconfig_backup
 	
 fi
 cp $dir/gitconfig $HOME/.gitconfig
 
 if [ -f $HOME/.zshrc ]; then 
-	echo "backing up old zshrc..."
-	mv $HOME/.zshrc $HOME/.zshrc_backup
+    echo "backing up old zshrc..."
+    mv $HOME/.zshrc $HOME/.zshrc_backup
 	
 fi
 cp $dir/zshrc $HOME/.zshrc
 
 if [ -f $HOME/.Xdefaults ]; then 
-	echo "backing up old Xdefaults..."
-	mv $HOME/.Xdefaults $HOME/.Xdefaults_backup
+    echo "backing up old Xdefaults..."
+    mv $HOME/.Xdefaults $HOME/.Xdefaults_backup
 	
 fi
 cp $dir/Xdefaults $HOME/.Xdefaults
 
-printf "Complete! Best used with zsh and URxvt.\n"
+printf "Complete! Best used with zsh and a Unicode-supported terminal.\n"
