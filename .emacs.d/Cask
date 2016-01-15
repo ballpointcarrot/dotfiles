@@ -27,6 +27,7 @@
 (depends-on "aggressive-indent")
 (depends-on "avy")
 (depends-on "cider")
+(depends-on "clj-refactor")
 (depends-on "clojure-mode-extra-font-locking")
 (depends-on "helm")
 (depends-on "helm-projectile")
@@ -46,6 +47,11 @@
 (depends-on "undo-tree")
 (depends-on "yafolding")
 (depends-on "yasnippet")
+
+;; Nixos-specific deps (group when possible?)
+(depends-on "nix-mode")
+(depends-on "nixos-options")
+(depends-on "helm-nixos-options")
 
 ;; Themes
 (depends-on "material-theme")
