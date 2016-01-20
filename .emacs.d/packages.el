@@ -59,3 +59,7 @@
 (eval-after-load "cask-autoloads"
   '(progn
      (add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))))
+
+(eval-after-load "nix-mode-autoloads"
+  '(progn
+     (add-hook 'nix-mode-hook #'(aggressive-indent-mode 0))))
