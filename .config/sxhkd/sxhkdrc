@@ -78,10 +78,15 @@ super + !button{1-3}
 
 super + @button{1-3}
 	bspc pointer -u
-
 #
 # wm independent hotkeys
 #
+
+XF86MonBrightnessUp
+        xbacklight +10
+
+XF86MonBrightnessDown
+        xbacklight -10
 
 super + Return
 	konsole
