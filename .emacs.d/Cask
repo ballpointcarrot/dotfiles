@@ -24,13 +24,12 @@
 (depends-on "use-package")
 
 ;; Functional dep list
+(depends-on "ido-vertical-mode")
 (depends-on "aggressive-indent")
 (depends-on "avy")
 (depends-on "cider")
 (depends-on "clj-refactor")
 (depends-on "clojure-mode-extra-font-locking")
-(depends-on "helm")
-(depends-on "helm-projectile")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "multiple-cursors")
@@ -57,3 +56,4 @@
 (depends-on "material-theme")
 (depends-on "moe-theme")
 (depends-on "waher-theme")
+(depends-on "emojify")
