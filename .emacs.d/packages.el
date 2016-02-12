@@ -71,5 +71,10 @@
 (eval-after-load "ido-vertical-mode-autoloads"
   '(progn
      (ido-mode 1)
+     (ido-everywhere 1)
      (ido-vertical-mode 1)
      (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)))
+
+(eval-after-load "ido-ubiquitous-autoloads"
+  '(progn
+     (ido-ubiquitous-mode 1)))

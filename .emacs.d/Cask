@@ -25,6 +25,7 @@
 
 ;; Functional dep list
 (depends-on "ido-vertical-mode")
+(depends-on "ido-ubiquitous")
 (depends-on "aggressive-indent")
 (depends-on "avy")
 (depends-on "cider")
@@ -46,11 +47,6 @@
 (depends-on "undo-tree")
 (depends-on "yafolding")
 (depends-on "yasnippet")
-
-;; Nixos-specific deps (group when possible?)
-(depends-on "nix-mode")
-(depends-on "nixos-options")
-(depends-on "helm-nixos-options")
 
 ;; Themes
 (depends-on "material-theme")
