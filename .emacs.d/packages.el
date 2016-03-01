@@ -19,6 +19,10 @@
   '(progn
      (yas-global-mode t)))
 
+(eval-after-load "auto-complete-autoloads"
+  '(progn
+     (global-auto-complete-mode t)))
+
 ;; Requires addition of mode into hooks:
 
 (eval-after-load "aggressive-indent-autoloads"

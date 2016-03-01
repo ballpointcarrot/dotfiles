@@ -26,6 +26,7 @@
 ;; Functional dep list
 (depends-on "ido-vertical-mode")
 (depends-on "ido-ubiquitous")
+(depends-on "auto-complete")
 (depends-on "aggressive-indent")
 (depends-on "avy")
 (depends-on "cider")
