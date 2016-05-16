@@ -54,3 +54,4 @@
 (depends-on "moe-theme")
 (depends-on "waher-theme")
 (depends-on "emojify")
+(depends-on "dracula-theme")
