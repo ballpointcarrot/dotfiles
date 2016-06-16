@@ -48,6 +48,7 @@
 (depends-on "undo-tree")
 (depends-on "yafolding")
 (depends-on "yasnippet")
+(depends-on "evil")
 
 ;; Themes
 (depends-on "material-theme")

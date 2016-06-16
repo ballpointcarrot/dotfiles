@@ -34,6 +34,12 @@
      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
      (add-hook 'prog-mode-hook #'electric-pair-mode)))
 
+(eval-after-load "evil-autoloads"
+  '(progn
+     (evil-mode t)
+     (add-hook 'prog-mode-hook #'evil-mode)
+     (evil-set-initial-state 'erc-mode 'emacs)))
+
 ;; Requires additional configuration.
 
 (eval-after-load "avy-autoloads"

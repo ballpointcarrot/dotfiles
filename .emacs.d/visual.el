@@ -22,7 +22,7 @@
 
 ;; GUI-based improvements
 (when window-system
-  (set-face-attribute 'default nil :family "source code pro" :weight 'medium :height 90)
+  (set-face-attribute 'default nil :family "Source Code Pro" :weight 'medium :height 90)
   (scroll-bar-mode 0)
   )
 
