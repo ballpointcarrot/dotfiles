@@ -19,6 +19,9 @@
       auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 (global-auto-revert-mode 1)
 
+;; Fix indents (I HATE tabs...)
+(setq-default indent-tabs-mode nil)
+
 ;; Save the place from the last time you touched a file:
 (require 'saveplace)
 (setq-default save-place t)
