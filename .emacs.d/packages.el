@@ -34,11 +34,11 @@
      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
      (add-hook 'prog-mode-hook #'electric-pair-mode)))
 
-(eval-after-load "evil-autoloads"
-  '(progn
-     (evil-mode t)
-     (add-hook 'prog-mode-hook #'evil-mode)
-     (evil-set-initial-state 'erc-mode 'emacs)))
+;; (eval-after-load "evil-autoloads"
+;;   '(progn
+;;      (evil-mode t)
+;;      (add-hook 'prog-mode-hook #'evil-mode)
+;;      (evil-set-initial-state 'erc-mode 'emacs)))
 
 ;; Requires additional configuration.
 
@@ -72,11 +72,34 @@
   '(progn
      (add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))))
 
-(eval-after-load "smex-autoloads"
+;; (eval-after-load "smex-autoloads"
+;;   '(progn
+;;      (smex-initialize)
+;;      (global-set-key (kbd "M-x") 'smex)
+;;      (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+
+(eval-after-load "swiper-autoloads"
   '(progn
-     (smex-initialize)
-     (global-set-key (kbd "M-x") 'smex)
-     (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+     (ivy-mode 1) 
+     ;; Ivy replacements to standard emacs commands
+     (global-set-key (kbd "C-s") 'swiper)
+     (global-set-key (kbd "M-x") 'counsel-M-x)
+     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+     (global-set-key (kbd "C-c C-r") 'ivy-resume)
+     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+     (global-set-key (kbd "<f1> l") 'counsel-load-library)
+     (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+     (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+
+     ;; Ivy interfaces to shell tools
+     (global-set-key (kbd "C-c g") 'counsel-git)
+     (global-set-key (kbd "C-c j") 'counsel-git-grep)
+     (global-set-key (kbd "C-c k") 'counsel-ag)
+
+     ;;(global-set-key (kbd "C-x l") 'counsel-locate)
+     ;;(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+     ))
 
 (eval-after-load "ido-vertical-mode-autoloads"
   '(progn

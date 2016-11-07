@@ -41,6 +41,7 @@
 (depends-on "rainbow-delimiters")
 (depends-on "smartparens")
 (depends-on "swiper")
+(depends-on "counsel")
 (depends-on "visual-regexp")
 (depends-on "visual-regexp-steroids")
 (depends-on "web-mode")
