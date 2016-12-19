@@ -33,4 +33,4 @@
       (require 'moe-theme))
   (load-theme theme t))
 
-(set-theme 'dracula)
+(set-theme 'leuven)

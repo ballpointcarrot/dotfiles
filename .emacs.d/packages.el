@@ -34,6 +34,10 @@
      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
      (add-hook 'prog-mode-hook #'electric-pair-mode)))
 
+(eval-after-load 'web-mode-autoloads
+  '(progn
+     (add-to-list 'auto-mode-alist '(".jsp" . web-mode))))
+
 ;; (eval-after-load "evil-autoloads"
 ;;   '(progn
 ;;      (evil-mode t)
@@ -45,7 +49,7 @@
 (eval-after-load "avy-autoloads"
   '(progn
      (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
-     (global-set-key (kbd "C-c C-SPC") 'avy-goto-char)
+     (global-set-key (kbd "C-c C-g") 'avy-goto-char)
      (global-set-key (kbd "C-c w") 'avy-goto-word-1)))
 
 ;; (eval-after-load "helm-autoloads"
