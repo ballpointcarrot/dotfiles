@@ -23,37 +23,43 @@
 (depends-on "smex")
 (depends-on "use-package")
 
-;; Functional dep list
+;; Makes the environment usable
 (depends-on "ido-vertical-mode")
 (depends-on "ido-ubiquitous")
 (depends-on "auto-complete")
 (depends-on "aggressive-indent")
 (depends-on "avy")
+(depends-on "multiple-cursors")
+(depends-on "rainbow-delimiters")
+(depends-on "smartparens")
+(depends-on "swiper")
+(depends-on "counsel")
+
+;; Programming extensions
 (depends-on "cider")
 (depends-on "clj-refactor")
 (depends-on "clojure-mode-extra-font-locking")
 (depends-on "magit")
 (depends-on "markdown-mode")
-(depends-on "multiple-cursors")
-(depends-on "org")
 (depends-on "paredit")
-(depends-on "projectile")
-(depends-on "rainbow-delimiters")
-(depends-on "smartparens")
-(depends-on "swiper")
-(depends-on "counsel")
 (depends-on "visual-regexp")
 (depends-on "visual-regexp-steroids")
 (depends-on "web-mode")
-(depends-on "which-key")
-(depends-on "undo-tree")
 (depends-on "yafolding")
 (depends-on "yasnippet")
-(depends-on "evil")
+
+;; Additional functionality
+(depends-on "org")
+(depends-on "which-key")
+(depends-on "undo-tree")
+(depends-on "circe")
 
 ;; Themes
+(depends-on "monokai-theme")
+(depends-on "leuven-theme")
 (depends-on "material-theme")
 (depends-on "moe-theme")
 (depends-on "waher-theme")
 (depends-on "emojify")
 (depends-on "dracula-theme")
+

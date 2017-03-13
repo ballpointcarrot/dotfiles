@@ -29,8 +29,14 @@
 ;; Themes
 (defun set-theme (theme)
   (interactive)
-  (if (not (boundp 'moe-theme))
-      (require 'moe-theme))
   (load-theme theme t))
 
-(set-theme 'leuven)
+(defun set-light-theme ()
+  (interactive)
+  (set-theme 'leuven))
+
+(defun set-dark-theme ()
+  (interactive)
+  (set-theme 'monokai))
+
+(set-light-theme)

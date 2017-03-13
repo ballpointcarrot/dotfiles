@@ -31,6 +31,7 @@
 (load "~/.emacs.d/packages.el")
 (load "~/.emacs.d/visual.el")
 (load "~/.emacs.d/eshell.el")
+(load "~/.emacs.d/org-cfg.el")
 (if (file-exists-p "~/.emacs.d/init-local.el")
     (load "~/.emacs.d/init-local.el"))
 
