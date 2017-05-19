@@ -39,4 +39,4 @@
   (interactive)
   (set-theme 'monokai))
 
-(set-light-theme)
+(set-dark-theme)

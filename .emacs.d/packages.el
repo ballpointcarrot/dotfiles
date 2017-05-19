@@ -38,12 +38,14 @@
   '(progn
      (add-to-list 'auto-mode-alist '(".jsp" . web-mode))))
 
-;; (eval-after-load "evil-autoloads"
-;;   '(progn
-;;      (evil-mode t)
-;;      (add-hook 'prog-mode-hook #'evil-mode)
-;;      (evil-set-initial-state 'erc-mode 'emacs)))
-
+(eval-after-load "evil-autoloads"
+  '(progn
+     ;;     (evil-mode t)
+     (add-hook 'prog-mode-hook #'evil-mode)))
+;; (evil-set-initial-state 'erc-mode 'emacs)))
+(eval-after-load "origami-autoloads"
+  '(progn
+     (add-hook 'prog-mode-hook #'origami-mode)))
 ;; Requires additional configuration.
 
 (eval-after-load "avy-autoloads"

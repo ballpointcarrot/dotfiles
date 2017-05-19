@@ -32,6 +32,7 @@
 (depends-on "multiple-cursors")
 (depends-on "rainbow-delimiters")
 (depends-on "smartparens")
+(depends-on "evil")
 (depends-on "swiper")
 (depends-on "counsel")
 
@@ -47,6 +48,7 @@
 (depends-on "web-mode")
 (depends-on "yafolding")
 (depends-on "yasnippet")
+(depends-on "origami")
 
 ;; Additional functionality
 (depends-on "org")
