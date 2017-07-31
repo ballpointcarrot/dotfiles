@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="junkfood"
+ZSH_THEME="steeef"
 # ZSH_THEME="kolo"
 # ZSH_THEME="nanotech"
 
@@ -31,11 +31,24 @@ ZSH_THEME="junkfood"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby vim rbenv)
+plugins=(aws colored-man-pages docker git lein node npm nvm rust tmux vim rbenv)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-#export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
-#export EDITOR=vim
+export HOMEPATH=$HOME/.local/bin:$HOME/.cask/bin:$HOME/bin:$HOME/.rbenv/bin
+export PATH=$HOMEPATH:$PATH
 
+if [ "$COLORTERM" = "gnome-terminal" ] || [ "$COLORTERM" = "xfce4-terminal" ] || [ -n "$KONSOLE_PROFILE_NAME" ]; then
+    if [ -z "$TMUX" ]; then
+        export TERM="xterm-256color"
+    fi
+fi
+
+if [ "$TERM" = "dumb" ]; then
+    export PS1="> "
+fi
+
+for file in $(find $HOME/.zsh.d -type f); do
+    source $file
+done
