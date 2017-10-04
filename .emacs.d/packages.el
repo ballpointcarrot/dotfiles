@@ -19,10 +19,6 @@
   '(progn
      (yas-global-mode t)))
 
-(eval-after-load "auto-complete-autoloads"
-  '(progn
-     (global-auto-complete-mode t)))
-
 ;; Requires addition of mode into hooks:
 
 (eval-after-load "aggressive-indent-autoloads"
@@ -34,15 +30,25 @@
      (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
      (add-hook 'prog-mode-hook #'electric-pair-mode)))
 
+(eval-after-load "company-autoloads"
+  '(progn
+     (add-hook 'prog-mode-hook #'company-mode)))
+
 (eval-after-load 'web-mode-autoloads
   '(progn
      (add-to-list 'auto-mode-alist '(".jsp" . web-mode))))
 
-(eval-after-load "evil-autoloads"
+(eval-after-load "parinfer-autoloads"
   '(progn
-     ;;     (evil-mode t)
-     (add-hook 'prog-mode-hook #'evil-mode)))
+     (add-hook 'lisp-mode-hook #'parinfer-mode)
+     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)))
+
+;; (eval-after-load "evil-autoloads"
+;;   '(progn
+;;      ;;     (evil-mode t)
+;;      (add-hook 'prog-mode-hook #'evil-mode)))
 ;; (evil-set-initial-state 'erc-mode 'emacs)))
+
 (eval-after-load "origami-autoloads"
   '(progn
      (add-hook 'prog-mode-hook #'origami-mode)))
@@ -52,14 +58,8 @@
   '(progn
      (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
      (global-set-key (kbd "C-c C-g") 'avy-goto-char)
+     (global-set-key (kbd "C-j") 'avy-goto-word-0)
      (global-set-key (kbd "C-c w") 'avy-goto-word-1)))
-
-;; (eval-after-load "helm-autoloads"
-;;   '(progn
-;;      (helm-mode 1)
-;;      (global-set-key "\M-x" 'helm-M-x)
-;;      (global-set-key (kbd "C-c h") 'helm-mini)
-;;      (global-set-key (kbd "C-x C-f") 'helm-find-files)))
 
 (eval-after-load "multiple-cursors-autoloads"
   '(progn
@@ -68,21 +68,9 @@
      (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
      (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)))
 
-;; (eval-after-load "helm-projectile-autoloads"
-;;   '(progn
-;;      (projectile-global-mode)
-;;      (setq projectile-completion-system 'helm)
-;;      (helm-projectile-on)))
-
 (eval-after-load "cask-autoloads"
   '(progn
      (add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))))
-
-;; (eval-after-load "smex-autoloads"
-;;   '(progn
-;;      (smex-initialize)
-;;      (global-set-key (kbd "M-x") 'smex)
-;;      (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
 (eval-after-load "swiper-autoloads"
   '(progn
@@ -101,11 +89,7 @@
      ;; Ivy interfaces to shell tools
      (global-set-key (kbd "C-c g") 'counsel-git)
      (global-set-key (kbd "C-c j") 'counsel-git-grep)
-     (global-set-key (kbd "C-c k") 'counsel-ag)
-
-     ;;(global-set-key (kbd "C-x l") 'counsel-locate)
-     ;;(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-     ))
+     (global-set-key (kbd "C-c k") 'counsel-ag)))
 
 (eval-after-load "ido-vertical-mode-autoloads"
   '(progn

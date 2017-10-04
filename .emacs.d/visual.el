@@ -5,7 +5,6 @@
       scroll-preserve-screen-position 1)
 
 ;; inside
-(set-fringe-mode '(10 . 0))
 (setq split-width-threshold nil)
 (setq split-height-threshold 0)
 (global-linum-mode 1)
@@ -22,7 +21,11 @@
 
 ;; GUI-based improvements
 (when window-system
-  (set-face-attribute 'default nil :family "Source Code Pro" :weight 'medium :height 90)
+  (set-face-attribute 'default nil :family "Office Code Pro" :weight 'light :height 100)
+  ;; font options:
+  ;; Anonymous Pro
+  ;; Hasklig
+  ;; Office Code Pro
   (scroll-bar-mode 0)
   )
 
