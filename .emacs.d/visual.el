@@ -21,13 +21,13 @@
 
 ;; GUI-based improvements
 (when window-system
-  (set-face-attribute 'default nil :family "Office Code Pro" :weight 'light :height 100)
   ;; font options:
   ;; Anonymous Pro
   ;; Hasklig
   ;; Office Code Pro
-  (scroll-bar-mode 0)
-  )
+  (set-face-attribute 'default nil :family "Office Code Pro" :weight 'light :height 120)
+  (if 'scroll-bar-mode
+      (scroll-bar-mode 0)))
 
 ;; Themes
 (defun set-theme (theme)

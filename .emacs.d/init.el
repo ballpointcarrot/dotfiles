@@ -27,6 +27,15 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
+;; Global adjustments that I like over defaults
+(autoload 'zap-up-to-char "misc"
+  "Kill up to, but not including ARGth occurrence of CHAR.
+  \(fn arg char)"
+  'interactive)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+(put 'upcase-region 'disabled nil)
+
+
 ;; Load other files:
 (load "~/.emacs.d/packages.el")
 (load "~/.emacs.d/visual.el")
