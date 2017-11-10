@@ -5,20 +5,29 @@ echo "==============================="
 dir=$HOME/.dotfiles
 cd $HOME
 
+if [ -z "$(/usr/bin/which git)" ]; then
+    echo "Please install git before continuing."
+    exit 1
+fi
+
 printf "\nCloning dotfiles..."
 git clone https://github.com/ballpointcarrot/dotfiles.git $dir
 
-printf "\n\nInstalling Oh My ZSH...\n"
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh > /dev/null 2>&1
+#printf "\n\nInstalling Oh My ZSH...\n"
+#curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh > /dev/null 2>&1
+
+printf "\n\nInstalling ZPrezto...\n"
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+cp $dir/zpreztorc $HOME/.zpreztorc
 
 printf "\n\nCloning vim config..."
 if [ -d $HOME/.vim ]; then
-	echo "First, backing up existing vim config."
-	if [ -d $HOME/.vim_backup ]; then
-		rm -rf $HOME/.vim_backup
-	fi
-	mv $HOME/.vim $HOME/.vim_backup
-	mv $HOME/.vimrc $HOME/.vim_backup/vimrc_backup
+    echo "First, backing up existing vim config."
+    if [ -d $HOME/.vim_backup ]; then
+	rm -rf $HOME/.vim_backup
+    fi
+    mv $HOME/.vim $HOME/.vim_backup
+    mv $HOME/.vimrc $HOME/.vim_backup/vimrc_backup
 fi
 
 printf "\n\nInstalling Emacs configuration..."
@@ -53,21 +62,22 @@ printf "\nInstalling fresh dotfiles...\n"
 if [ -f $HOME/.gitconfig ]; then 
     echo "backing up old gitconfig..."
     mv $HOME/.gitconfig $HOME/.gitconfig_backup
-	
+    
 fi
 cp $dir/gitconfig $HOME/.gitconfig
 
 if [ -f $HOME/.zshrc ]; then 
     echo "backing up old zshrc..."
     mv $HOME/.zshrc $HOME/.zshrc_backup
-	
+    
 fi
 cp $dir/zshrc $HOME/.zshrc
+
 
 if [ -f $HOME/.Xdefaults ]; then 
     echo "backing up old Xdefaults..."
     mv $HOME/.Xdefaults $HOME/.Xdefaults_backup
-	
+    
 fi
 cp $dir/Xdefaults $HOME/.Xdefaults
 

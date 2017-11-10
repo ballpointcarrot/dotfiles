@@ -1,0 +1,8 @@
+zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history' 'directory' 'spectrum' 'utility' 'completion' 'prompt'
+
+# acceptable prompt themes:
+# 'giddie'
+# 'skwp'
+# 'steeef'
+# 'bigfade'
+zstyle ':prezto:module:prompt' theme 'steeef'
