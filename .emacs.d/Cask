@@ -51,6 +51,7 @@
 (depends-on "org")
 (depends-on "which-key")
 (depends-on "circe")
+(depends-on "bbdb")
 
 ;; Themes
 (depends-on "monokai-theme")

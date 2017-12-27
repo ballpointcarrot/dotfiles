@@ -15,8 +15,9 @@
 ;; Aliases
 
 (defalias 'e 'find-file)
-(defalias 'ee 'find-file-other-window)
+(defalias 'vim 'find-file)
 (defalias 'ff 'find-file)
+(defalias 'ee 'find-file-other-window)
 (defalias 'ffow 'find-file-other-window)
 (defalias 'emacs 'find-file-other-window)
 
@@ -32,3 +33,4 @@
 	    (add-to-list 'eshell-visual-commands "tail")))
 
 ;;; End eshell.el
+

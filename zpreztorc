@@ -1,4 +1,4 @@
-zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history' 'directory' 'spectrum' 'utility' 'completion' 'prompt'
+zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history' 'history-substring-search' 'directory' 'spectrum' 'utility' 'completion' 'prompt'
 
 # acceptable prompt themes:
 # 'giddie'
@@ -6,3 +6,5 @@ zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history' 'direc
 # 'steeef'
 # 'bigfade'
 zstyle ':prezto:module:prompt' theme 'steeef'
+
+zstyle ':prezto:module:history-substring-search' color 'yes'
