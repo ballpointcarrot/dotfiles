@@ -40,15 +40,6 @@ if [ -d $HOME/.emacs.d ]; then
     mv $HOME/.emacs.d $HOME/.emacs.d.backup
     mkdir $HOME/.emacs.d
     ln -s $dir/.emacs.d/* $HOME/.emacs.d/
-
-    if grep -q "not found" <<< $(which cask); then
-	printf "Cask not found - please install Cask and re-run to finish Emacs config install."
-    else
-	printf "Running 'cask install' in emacs directory."
-	current=$(pwd)
-	cd $HOME/.emacs.d; cask install
-	cd $current
-    fi     
 fi
 
 printf "\n\nInstalling ballpointcarrot's vim config..."

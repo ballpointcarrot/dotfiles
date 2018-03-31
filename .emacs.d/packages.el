@@ -1,103 +1,172 @@
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
+;; Set up (use-package).
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")))
+(setq package-enable-at-startup nil)
+(package-initialize 'noactivate)
 
-;; Requires only to set the mode
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-(eval-after-load "smartparens-autoloads"
-  '(progn
-     (smartparens-mode t)))
+(eval-when-compile
+  (require 'use-package))
 
-(eval-after-load "undo-tree-autoloads"
-  '(progn
-     (global-undo-tree-mode t)))
+(require 'bind-key)
 
-(eval-after-load "which-key-autoloads"
-  '(progn
-     (which-key-mode)))
+(setq use-package-verbose t
+      use-package-always-ensure t)
 
-(eval-after-load "yasnippet-autoloads"
-  '(progn
-     (yas-global-mode t)))
+;; Packages which make my environment useful.
 
-;; Requires addition of mode into hooks:
+(use-package ido-vertical-mode
+  :init
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+  :config
+  (ido-mode 1)
+  (ido-vertical-mode 1)
+  (ido-everywhere 1))
 
-(eval-after-load "aggressive-indent-autoloads"
-  '(progn
-     (add-hook 'prog-mode-hook #'aggressive-indent-mode)))
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode 1))
 
-(eval-after-load "rainbow-delimiters-autoloads"
-  '(progn
-     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-     (add-hook 'prog-mode-hook #'electric-pair-mode)))
+(use-package smartparens
+  :config
+  (smartparens-global-mode 1))
 
-(eval-after-load "company-autoloads"
-  '(progn
-     (add-hook 'prog-mode-hook #'company-mode)))
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode t))
 
-(eval-after-load 'web-mode-autoloads
-  '(progn
-     (add-to-list 'auto-mode-alist '(".jsp" . web-mode))))
+(use-package which-key
+  :config
+  (which-key-mode))
 
-(eval-after-load "parinfer-autoloads"
-  '(progn
-     (add-hook 'lisp-mode-hook #'parinfer-mode)
-     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)))
+(use-package yasnippet
+  :config
+  (yas-global-mode t))
 
-;; (eval-after-load "evil-autoloads"
-;;   '(progn
-;;      ;;     (evil-mode t)
-;;      (add-hook 'prog-mode-hook #'evil-mode)))
-;; (evil-set-initial-state 'erc-mode 'emacs)))
+(use-package aggressive-indent
+  :config
+  (global-aggressive-indent-mode t)
+  (dolist (item  '(emacs-lisp-mode lisp-mode html-mode))
+    (add-to-list 'aggressive-indent-excluded-modes item)))
 
-(eval-after-load "origami-autoloads"
-  '(progn
-     (add-hook 'prog-mode-hook #'origami-mode)))
-;; Requires additional configuration.
+(use-package rainbow-delimiters
+  :commands rainbow-delimiters-mode
+  :hook
+  (prog-mode . rainbow-delimiters-mode)
+  :config
+  (use-package color :ensure nil
+    :commands color-saturate-name
+    :demand t
+    :config
+    (cl-loop
+     for index from 1 to rainbow-delimiters-max-face-count
+     do
+     (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+       (cl-callf color-saturate-name (face-foreground face) 20)))))
 
-(eval-after-load "avy-autoloads"
-  '(progn
-     (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
-     (global-set-key (kbd "C-c C-g") 'avy-goto-char)
-     (global-set-key (kbd "C-j") 'avy-goto-word-0)
-     (global-set-key (kbd "C-c w") 'avy-goto-word-1)))
+(use-package company
+  :commands global-company-mode
+  :hook (prog-mode . company-mode)
+  :config
+  (setq company-tooltip-limit 10
+        company-idle-delay 0.2
+        company-echo-delay 0
+        company-minimum-prefix-length 3
+        company-require-match nil
+        company-selection-wrap-around t
+        company-tooltip-align-annotations t
+        company-tooltip-flip-when-above t
+        company-transformers '(company-sort-by-occurrence))
+  (bind-keys :map company-active-map
+             ("C-p" . company-select-previous)
+             ("C-n" . company-select-next)
+             ("TAB" . company-complete-common-or-cycle)))
 
-(eval-after-load "multiple-cursors-autoloads"
-  '(progn
-     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-     (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-     (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)))
+(use-package parinfer
+  :init
+  (setq parinfer-extensions '(defaults smart-yank))
+  :hook
+  ((lisp-mode . parinfer-mode) (emacs-lisp-mode . parinfer-mode)))
 
-(eval-after-load "cask-autoloads"
-  '(progn
-     (add-to-list 'auto-mode-alist '("Cask\\'" . lisp-mode))))
+(use-package origami :hook (prog-mode . origami-mode))
 
-(eval-after-load "swiper-autoloads"
-  '(progn
-     (ivy-mode 1) 
-     ;; Ivy replacements to standard emacs commands
-     (global-set-key (kbd "C-s") 'swiper)
-     (global-set-key (kbd "M-x") 'counsel-M-x)
-     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-     (global-set-key (kbd "C-c C-r") 'ivy-resume)
-     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-     (global-set-key (kbd "<f1> l") 'counsel-load-library)
-     (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-     (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(use-package avy
+  :init
+  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
+  :bind (("C-c C-g" . avy-goto-char)
+         ("C-j" . avy-goto-word-0)
+         ("C-c w" . avy-goto-word-1)))
 
-     ;; Ivy interfaces to shell tools
-     (global-set-key (kbd "C-c g") 'counsel-git)
-     (global-set-key (kbd "C-c j") 'counsel-git-grep)
-     (global-set-key (kbd "C-c k") 'counsel-ag)))
+(use-package multiple-cursors
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-S-c C-S-c" . mc/edit-lines)))
 
-(eval-after-load "ido-vertical-mode-autoloads"
-  '(progn
-     (ido-mode 1)
-     (ido-everywhere 1)
-     (ido-vertical-mode 1)
-     (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)))
+(use-package swiper
+  :config
+  (ivy-mode 1)
+  :bind (("C-s" . swiper)
+         ("C-c C-r" . ivy-resume)))
 
-(eval-after-load "ido-ubiquitous-autoloads"
-  '(progn
-     (ido-ubiquitous-mode 1)))
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c g" . counsel-git)
+         ("C-c j" . counsel-git-grep)
+         ("C-c k" . counsel-ag)))
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
+;; Programming-specific.
+
+(use-package flycheck
+  :commands flycheck-mode
+  :config
+  (defalias 'flycheck-show-error-at-point-soon 'flycheck-show-error-at-point))
+
+(use-package clojure-mode
+  :mode ("\\.clj\\'" "\\.cljs\\'" "\\.cljc\\'")
+  :config
+  (use-package cljsbuild-mode))
+
+(use-package cider
+  :commands cider-mode
+  :init
+  (with-eval-after-load 'clojure-mode
+    (add-hook 'clojure-mode-hook #'cider-mode))
+  :config
+  (setq nrepl-hide-special-buffers t
+        cider-repl-pop-to-buffer-on-connect nil
+        cider-repl-use-clojure-font-lock t))
+
+(use-package flycheck-clojure)
+
+;; Packages that make things pretty.
+(use-package flatui-theme :no-require t)
+(use-package flatui-dark-theme :no-require t)
+(use-package monokai-theme :no-require t)
+(use-package leuven-theme :disabled)
+(use-package emojify)
+
+;; Packages not requiring configuration.
+(use-package circe)
+(use-package bbdb)
+(use-package org)
+(use-package markdown-mode)
+(use-package cider)
+(use-package clj-refactor)
+(use-package clojure-mode-extra-font-locking)
+(use-package web-mode)
+(use-package magit)
+(use-package smex)
+(use-package idle-highlight-mode)

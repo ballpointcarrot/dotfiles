@@ -36,10 +36,10 @@
 
 (defun set-light-theme ()
   (interactive)
-  (set-theme 'leuven))
+  (set-theme 'flatui))
 
 (defun set-dark-theme ()
   (interactive)
   (set-theme 'monokai))
 
-(set-dark-theme)
+(set-light-theme)
