@@ -48,7 +48,8 @@
 
 (use-package yasnippet
   :config
-  (yas-global-mode t))
+  (yas-global-mode t)
+  (use-package yasnippet-snippets))
 
 (use-package aggressive-indent
   :config
@@ -150,6 +151,18 @@
         cider-repl-use-clojure-font-lock t))
 
 (use-package flycheck-clojure)
+(use-package clj-refactor)
+(use-package clojure-mode-extra-font-locking)
+(use-package web-mode)
+
+(use-package yaml-mode)
+
+(use-package rust-mode)
+(use-package toml-mode)
+(use-package company-racer)
+
+(use-package dockerfile-mode)
+(use-package docker-compose-mode)
 
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
@@ -157,16 +170,13 @@
 (use-package monokai-theme :no-require t)
 (use-package leuven-theme :disabled)
 (use-package emojify)
+(use-package password-store)
 
 ;; Packages not requiring configuration.
 (use-package circe)
 (use-package bbdb)
 (use-package org)
 (use-package markdown-mode)
-(use-package cider)
-(use-package clj-refactor)
-(use-package clojure-mode-extra-font-locking)
-(use-package web-mode)
 (use-package magit)
 (use-package smex)
 (use-package idle-highlight-mode)
