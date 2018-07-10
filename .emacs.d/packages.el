@@ -135,6 +135,7 @@
   :config
   (defalias 'flycheck-show-error-at-point-soon 'flycheck-show-error-at-point))
 
+;; Clojure
 (use-package clojure-mode
   :mode ("\\.clj\\'" "\\.cljs\\'" "\\.cljc\\'")
   :config
@@ -153,7 +154,14 @@
 (use-package flycheck-clojure)
 (use-package clj-refactor)
 (use-package clojure-mode-extra-font-locking)
+
 (use-package web-mode)
+(use-package json-mode)
+(use-package js2-mode
+  :mode ("\\.js\\'" "\\.jsx\\'" "\\.json\\'")
+  :config
+  (use-package js2-refactor
+    :hook (js2-mode . js2-refactor-mode)))
 
 (use-package yaml-mode)
 
@@ -163,6 +171,23 @@
 
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)
+
+;; Rust
+(use-package lsp-rust
+  :config
+  (use-package lsp-mode))
+
+(use-package rust-mode
+  :init
+  (lsp-define-stdio-client
+   rust-mode
+   "rust"
+   #'lsp-rust--get-root
+   (lsp-rust--rls-command))
+  :config
+  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
+  :hook
+  ((rust-mode . lsp-rust-enable) (rust-mode . flycheck-mode)))
 
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
