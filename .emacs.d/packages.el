@@ -5,6 +5,7 @@
         ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "http://orgmode.org/elpa/")
         ("marmalade" . "http://marmalade-repo.org/packages/")))
+
 (setq package-enable-at-startup nil)
 (package-initialize 'noactivate)
 
@@ -100,7 +101,9 @@
 
 (use-package avy
   :init
-  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
+  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)) ; Because Dvorak.
+  (setq avy-case-fold-search nil)
+  (setq avy-style 'at)
   :bind (("C-c C-g" . avy-goto-char)
          ("C-j" . avy-goto-word-0)
          ("C-c w" . avy-goto-word-1)))
@@ -193,6 +196,7 @@
 (use-package flatui-theme :no-require t)
 (use-package flatui-dark-theme :no-require t)
 (use-package monokai-theme :no-require t)
+(use-package exotica-theme :no-require t)
 (use-package leuven-theme :disabled)
 (use-package emojify)
 (use-package password-store)

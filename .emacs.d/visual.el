@@ -25,7 +25,7 @@
   ;; Anonymous Pro
   ;; Hasklig
   ;; Office Code Pro
-  (set-face-attribute 'default nil :family "Office Code Pro" :weight 'light :height 120)
+  (set-face-attribute 'default nil :family "Office Code Pro" :weight 'normal :height 104)
   (if 'scroll-bar-mode
       (scroll-bar-mode 0)))
 
@@ -40,6 +40,8 @@
 
 (defun set-dark-theme ()
   (interactive)
-  (set-theme 'monokai))
+  (if window-system
+      (set-theme 'exotica)
+    (set-theme 'monokai)))
 
 (set-dark-theme)
