@@ -6,12 +6,12 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 
-(setq org-agenda-files (quote ("~/Notes/" "~/Calendar/")))
+(setq org-agenda-files (quote ("~/Notes/" "~/Calendar/" "~/GTD/")))
 (setq org-todo-keywords
       '((sequence "TODO" "PENDING" "DONE")))
 
-(setq org-directory "~/Notes")
-(setq org-default-notes-file (concat org-directory "/unfiled.org"))
+(setq org-directory "~/GTD")
+(setq org-default-notes-file (concat org-directory "/in.org"))
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
 

@@ -3,8 +3,7 @@
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
         ("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")
-        ("marmalade" . "http://marmalade-repo.org/packages/")))
+        ("org" . "http://orgmode.org/elpa/")))
 
 (setq package-enable-at-startup nil)
 (package-initialize 'noactivate)
