@@ -6,7 +6,7 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 
-(setq org-agenda-files (quote ("~/Notes/" "~/Calendar/" "~/GTD/")))
+(setq org-agenda-files (quote ("~/Notes/" "~/Notes/kumo/" "~/Notes/kumo/cs-ops-tools" "~/Notes/kumo/totalview-cs/" "~/Notes/kumo/virtual-associate/" "~/Calendar/" "~/GTD/")))
 (setq org-todo-keywords
       '((sequence "TODO" "PENDING" "DONE")))
 

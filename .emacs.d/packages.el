@@ -6,7 +6,7 @@
         ("org" . "http://orgmode.org/elpa/")))
 
 (setq package-enable-at-startup nil)
-(package-initialize 'noactivate)
+(package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -78,6 +78,7 @@
   :config
   (setq company-tooltip-limit 10
         company-idle-delay 0.2
+        company-dabbrev-downcase nil
         company-echo-delay 0
         company-minimum-prefix-length 3
         company-require-match nil
@@ -167,7 +168,6 @@
 
 (use-package yaml-mode)
 
-(use-package rust-mode)
 (use-package toml-mode)
 (use-package company-racer)
 
@@ -187,9 +187,9 @@
    #'lsp-rust--get-root
    (lsp-rust--rls-command))
   :config
-  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
+  (use-package flycheck-rust)
   :hook
-  ((rust-mode . lsp-rust-enable) (rust-mode . flycheck-mode)))
+  ((flycheck-mode . flycheck-rust-setup) (rust-mode . flycheck-mode)))
 
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
