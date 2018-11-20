@@ -64,13 +64,7 @@
   :config
   (use-package color :ensure nil
     :commands color-saturate-name
-    :demand t
-    :config
-    (cl-loop
-     for index from 1 to rainbow-delimiters-max-face-count
-     do
-     (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-       (cl-callf color-saturate-name (face-foreground face) 20)))))
+    :demand t))
 
 (use-package company
   :commands global-company-mode
@@ -165,6 +159,8 @@
   :config
   (use-package js2-refactor
     :hook (js2-mode . js2-refactor-mode)))
+(use-package restclient
+  :config (use-package company-restclient))
 
 (use-package yaml-mode)
 
