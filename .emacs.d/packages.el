@@ -60,11 +60,7 @@
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
   :hook
-  (prog-mode . rainbow-delimiters-mode)
-  :config
-  (use-package color :ensure nil
-    :commands color-saturate-name
-    :demand t))
+  (prog-mode . rainbow-delimiters-mode))
 
 (use-package company
   :commands global-company-mode
@@ -164,9 +160,6 @@
 
 (use-package yaml-mode)
 
-(use-package toml-mode)
-(use-package company-racer)
-
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)
 
@@ -175,17 +168,15 @@
   :config
   (use-package lsp-mode))
 
-(use-package rust-mode
-  :init
-  (lsp-define-stdio-client
-   rust-mode
-   "rust"
-   #'lsp-rust--get-root
-   (lsp-rust--rls-command))
+(use-package toml-mode)
+(use-package company-racer
   :config
-  (use-package flycheck-rust)
+  (use-package racer))
+
+(use-package flymake-rust)
+(use-package rust-mode
   :hook
-  ((flycheck-mode . flycheck-rust-setup) (rust-mode . flycheck-mode)))
+  ((rust-mode . racer-mode) (rust-mode . cargo-minor-mode) (flymake-mode . flycheck-rust-setup) (rust-mode . flycheck-mode)))
 
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
