@@ -22,10 +22,15 @@
 ;; GUI-based improvements
 (when window-system
   ;; font options:
-  ;; Anonymous Pro
-  ;; Hasklig
-  ;; Office Code Pro
-  (set-face-attribute 'default nil :family "Office Code Pro" :weight 'normal :height 104)
+  ;; FuraCode NF/medium/104
+  ;; DroidSansMono NF/medium/110
+  ;; InconsolataGo NF/medium/120
+  ;; "Iosevka Term,Iosevka NF" :weight 'medium :height 110
+  ;; "MesloLGL NF" :weight 'medium :height 110
+  ;; "mononoki NF" :weight 'medium :height 110
+  ;; "NotoMono NF" :weight 'medium :height 110
+  ;;
+  (set-face-attribute 'default nil :family "NotoMono NF" :weight 'medium :height 110)
   (if 'scroll-bar-mode
       (scroll-bar-mode 0)))
 

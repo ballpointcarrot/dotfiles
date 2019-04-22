@@ -24,7 +24,7 @@ printf "\n\nCloning vim config..."
 if [ -d $HOME/.vim ]; then
     echo "First, backing up existing vim config."
     if [ -d $HOME/.vim_backup ]; then
-	rm -rf $HOME/.vim_backup
+        rm -rf $HOME/.vim_backup
     fi
     mv $HOME/.vim $HOME/.vim_backup
     mv $HOME/.vimrc $HOME/.vim_backup/vimrc_backup
@@ -34,7 +34,7 @@ printf "\n\nInstalling Emacs configuration..."
 if [ -d $HOME/.emacs.d ]; then
     echo "Back up existing Emacs config."
     if [ -d $HOME/.emacs.d.backup ]; then
-	rm -rf $HOME/.emacs.d.backup
+        rm -rf $HOME/.emacs.d.backup
     fi
 
     mv $HOME/.emacs.d $HOME/.emacs.d.backup
@@ -49,26 +49,33 @@ cd .vim && git submodule update --init > /dev/null 2>&1
 cd $HOME
 ln -s $HOME/.vim/vimrc .vimrc
 
+# Nerd Fonts
+printf "\nInstalling Nerd Fonts...\n"
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git $dir/nerd-fonts > /dev/null 2>&1
+cd "$dir/nerd-fonts" && ./install.sh
+cd - || exit
+
+# Dotfiles
 printf "\nInstalling fresh dotfiles...\n"
-if [ -f $HOME/.gitconfig ]; then 
+if [ -f $HOME/.gitconfig ]; then
     echo "backing up old gitconfig..."
     mv $HOME/.gitconfig $HOME/.gitconfig_backup
-    
+
 fi
 cp $dir/gitconfig $HOME/.gitconfig
 
-if [ -f $HOME/.zshrc ]; then 
+if [ -f $HOME/.zshrc ]; then
     echo "backing up old zshrc..."
     mv $HOME/.zshrc $HOME/.zshrc_backup
-    
+
 fi
 cp $dir/zshrc $HOME/.zshrc
 
 
-if [ -f $HOME/.Xdefaults ]; then 
+if [ -f $HOME/.Xdefaults ]; then
     echo "backing up old Xdefaults..."
     mv $HOME/.Xdefaults $HOME/.Xdefaults_backup
-    
+
 fi
 cp $dir/Xdefaults $HOME/.Xdefaults
 

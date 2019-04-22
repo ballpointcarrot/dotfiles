@@ -46,6 +46,23 @@
   :config
   (which-key-mode))
 
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-search-module 'evil-search
+        evil-ex-complete-emacs-commands nil
+        evil-vsplit-window-right t
+        evil-split-window-below t
+        evil-shift-round nil
+        evil-want-C-u-scroll t)
+  :config
+  (use-package evil-surround
+    :hook (prog-mode . evil-surround-mode))
+  (evil-mode)
+  (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit)
+  (define-key evil-normal-state-map (kbd "z f") 'origami-close-node)
+  (define-key evil-normal-state-map (kbd "z o") 'origami-open-node))
+
 (use-package yasnippet
   :config
   (yas-global-mode t)
@@ -121,12 +138,22 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package linum-relative
+  :init
+  (setq linum-relative-current-symbol "")
+  :config
+  (linum-on))
+
 ;; Programming-specific.
 
-(use-package flycheck
-  :commands flycheck-mode
+(use-package flycheck-pos-tip
   :config
-  (defalias 'flycheck-show-error-at-point-soon 'flycheck-show-error-at-point))
+  (use-package flycheck
+    :commands flycheck-mode
+    :hook (prog-mode . flycheck-mode)
+    :config
+    (defalias 'flycheck-show-error-at-point-soon 'flycheck-show-error-at-point))
+  (flycheck-pos-tip-mode))
 
 ;; Clojure
 (use-package clojure-mode
@@ -148,13 +175,23 @@
 (use-package clj-refactor)
 (use-package clojure-mode-extra-font-locking)
 
-(use-package web-mode)
-(use-package json-mode)
+(use-package web-mode
+  :mode ("\\.html?\\'" "\\.erb\\'" "\\.mustache\\'")
+  :config
+  (use-package emmet-mode
+    :hook
+    ((sgml-mode . emmet-mode) (css-mode . emmet-mode))))
+
+(use-package json-mode
+  :mode ("\\.json\\'"))
+
 (use-package js2-mode
-  :mode ("\\.js\\'" "\\.jsx\\'" "\\.json\\'")
+  :mode ("\\.js\\'" "\\.jsx\\'")
   :config
   (use-package js2-refactor
-    :hook (js2-mode . js2-refactor-mode)))
+    :hook (js2-mode . js2-refactor-mode))
+  (setq js-switch-indent-offset js-indent-level))
+
 (use-package restclient
   :config (use-package company-restclient))
 
@@ -163,20 +200,30 @@
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)
 
-;; Rust
-(use-package lsp-rust
+;; LSP
+(use-package lsp-mode
+  :commands lsp
   :config
-  (use-package lsp-mode))
+  (use-package lsp-ui :commands lsp-ui-mode
+    :hook (lsp-mode . lsp-ui-mode))
+  (use-package company-lsp :commands company-lsp
+    :config (push 'company-lsp company-backends))
+  (use-package company-rust))
 
 (use-package toml-mode)
 (use-package company-racer
   :config
-  (use-package racer))
+  (use-package racer
+    :hook
+    (rust-mode . racer-mode)))
 
-(use-package flymake-rust)
+(use-package flymake-rust
+  :hook
+  (rust-mode . flycheck-mode))
+
 (use-package rust-mode
   :hook
-  ((rust-mode . racer-mode) (rust-mode . cargo-minor-mode) (flymake-mode . flycheck-rust-setup) (rust-mode . flycheck-mode)))
+  (rust-mode . cargo-minor-mode))
 
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
@@ -195,3 +242,6 @@
 (use-package magit)
 (use-package smex)
 (use-package idle-highlight-mode)
+
+(provide 'packages)
+;;; packages.el ends here
