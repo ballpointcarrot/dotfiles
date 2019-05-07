@@ -203,12 +203,17 @@
 ;; LSP
 (use-package lsp-mode
   :commands lsp
-  :config
-  (use-package lsp-ui :commands lsp-ui-mode
-    :hook (lsp-mode . lsp-ui-mode))
-  (use-package company-lsp :commands company-lsp
-    :config (push 'company-lsp company-backends))
-  (use-package company-rust))
+  :hook (prog-mode . lsp))
+
+(use-package lsp-ui :commands lsp-ui-mode
+    :hook (lsp-mode . lsp-ui-mode)
+    :config (setq lsp-ui-sideline-ignore-duplicate t))
+(use-package company-lsp :commands company-lsp
+       :config 
+       (push 'company-lsp company-backends)
+       (setq company-lsp-async t
+	     company-lsp-cache-candidates 'auto
+	     company-lsp-enable-recompletion t))
 
 (use-package toml-mode)
 (use-package company-racer
