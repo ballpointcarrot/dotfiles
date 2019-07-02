@@ -209,12 +209,11 @@
     :hook (lsp-mode . lsp-ui-mode)
     :config (setq lsp-ui-sideline-ignore-duplicate t))
 (use-package company-lsp :commands company-lsp
-       :config 
-       (push 'company-lsp company-backends)
-       (setq company-lsp-async t
-	     company-lsp-cache-candidates 'auto
-	     company-lsp-enable-recompletion t))
-
+  :config
+  (push 'company-lsp company-backends)
+  (setq company-lsp-async t
+        company-lsp-cache-candidates 'auto
+        company-lsp-enable-recompletion t))
 (use-package toml-mode)
 (use-package company-racer
   :config
