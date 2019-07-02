@@ -234,6 +234,7 @@
 (use-package flatui-dark-theme :no-require t)
 (use-package monokai-theme :no-require t)
 (use-package exotica-theme :no-require t)
+(use-package challenger-deep-theme :no-require t)
 (use-package leuven-theme :disabled)
 (use-package emojify)
 (use-package password-store)

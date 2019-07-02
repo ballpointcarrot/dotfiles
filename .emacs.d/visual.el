@@ -12,7 +12,7 @@
 ;; functionality
 (setq inhibit-startup-screen t)
 (setq-default fill-column 120)
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 (prefer-coding-system 'utf-8)
 
 ;; remove bounding entities
@@ -30,7 +30,7 @@
   ;; "mononoki NF" :weight 'medium :height 110
   ;; "NotoMono NF" :weight 'medium :height 110
   ;;
-  (set-face-attribute 'default nil :family "NotoMono NF" :weight 'medium :height 110)
+  (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono" :weight 'medium :height 110)
   (if 'scroll-bar-mode
       (scroll-bar-mode 0)))
 
@@ -40,13 +40,13 @@
   (load-theme theme t))
 
 (defun set-light-theme ()
+  "Set a light theme over all instances of the editor."
   (interactive)
   (set-theme 'flatui))
 
 (defun set-dark-theme ()
+  "Set a dark theme over all instances of the editor."
   (interactive)
-  (if window-system
-      (set-theme 'exotica)
-    (set-theme 'monokai)))
+  (set-theme 'challenger-deep))
 
 (set-dark-theme)
