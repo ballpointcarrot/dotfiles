@@ -1,6 +1,6 @@
 ;; Set up (use-package).
 (setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
+      '(("gnu" . "http://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
         ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
@@ -215,19 +215,22 @@
         company-lsp-cache-candidates 'auto
         company-lsp-enable-recompletion t))
 (use-package toml-mode)
-(use-package company-racer
-  :config
-  (use-package racer
-    :hook
-    (rust-mode . racer-mode)))
-
-(use-package flymake-rust
-  :hook
-  (rust-mode . flycheck-mode))
 
 (use-package rust-mode
-  :hook
-  (rust-mode . cargo-minor-mode))
+  :config
+  (use-package cargo
+    :hook
+    (rust-mode . cargo-minor-mode))
+  (use-package flycheck-rust
+    :init
+    (with-eval-after-load 'rust-mode
+      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+  (use-package company-racer
+   :config
+   (use-package racer
+    :hook
+    (rust-mode . racer-mode))))
+
 
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
