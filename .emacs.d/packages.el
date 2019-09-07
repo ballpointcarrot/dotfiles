@@ -63,6 +63,11 @@
   (define-key evil-normal-state-map (kbd "z f") 'origami-close-node)
   (define-key evil-normal-state-map (kbd "z o") 'origami-open-node))
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (use-package yasnippet
   :config
   (yas-global-mode t)
