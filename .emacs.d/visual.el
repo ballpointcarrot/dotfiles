@@ -19,6 +19,8 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
+(if 'scroll-bar-mode
+    (scroll-bar-mode 0))
 ;; GUI-based improvements
 (when window-system
   ;; font options:
@@ -31,8 +33,7 @@
   ;; "NotoMono NF" :weight 'medium :height 110
   ;;
   (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono" :weight 'medium :height 110)
-  (if 'scroll-bar-mode
-      (scroll-bar-mode 0)))
+)
 
 ;; Themes
 (defun set-theme (theme)
@@ -47,6 +48,7 @@
 (defun set-dark-theme ()
   "Set a dark theme over all instances of the editor."
   (interactive)
-  (set-theme 'challenger-deep))
+  (kaolin-temple-theme))
+  ;(set-theme 'challenger-deep))
 
-(set-dark-theme)
+;(set-dark-theme)

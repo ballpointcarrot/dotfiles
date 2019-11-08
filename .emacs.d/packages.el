@@ -176,7 +176,8 @@
         cider-repl-pop-to-buffer-on-connect nil
         cider-repl-use-clojure-font-lock t))
 
-(use-package flycheck-clojure)
+(use-package flycheck-joker)
+(use-package flycheck-clj-kondo)
 (use-package clj-refactor)
 (use-package clojure-mode-extra-font-locking)
 
@@ -240,6 +241,11 @@
 ;; Packages that make things pretty.
 (use-package flatui-theme :no-require t)
 (use-package flatui-dark-theme :no-require t)
+(use-package kaolin-themes
+  :config
+  (use-package all-the-icons)
+  (load-theme 'kaolin-bubblegum t)
+  (kaolin-treemacs-theme))
 (use-package monokai-theme :no-require t)
 (use-package exotica-theme :no-require t)
 (use-package challenger-deep-theme :no-require t)
