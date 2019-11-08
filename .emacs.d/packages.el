@@ -63,11 +63,6 @@
   (define-key evil-normal-state-map (kbd "z f") 'origami-close-node)
   (define-key evil-normal-state-map (kbd "z o") 'origami-open-node))
 
-(use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
-
 (use-package yasnippet
   :config
   (yas-global-mode t)
@@ -151,6 +146,11 @@
 
 ;; Programming-specific.
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (use-package flycheck-pos-tip
   :config
   (use-package flycheck
@@ -186,7 +186,12 @@
   :config
   (use-package emmet-mode
     :hook
-    ((sgml-mode . emmet-mode) (css-mode . emmet-mode))))
+    ((sgml-mode . emmet-mode) (css-mode . emmet-mode)))
+  (use-package company-web-html
+    :hook
+    ((web-mode-hook . (lambda ()
+                        (set (make-local-variable 'company-backends) '(company-web-html))
+                        (company-mode t))))))
 
 (use-package json-mode
   :mode ("\\.json\\'"))

@@ -15,9 +15,9 @@
 
 ;; Fix indents (I HATE tabs...)
 (setq-default indent-tabs-mode nil)
-(setq whitespace-style
-      '(face tabs spaces trailing lines-tail newline empty indentation::space space-before-tab::space))
-(setq whitespace-line-column 120)
+(setq-default whitespace-style
+              '(face tabs spaces trailing lines-tail newline empty indentation::space space-before-tab::space))
+(setq-default whitespace-line-column 120)
 
 ;; Save the place from the last time you touched a file:
 (require 'saveplace)
@@ -34,6 +34,9 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Small tweaks/performance fixes
+(setq auto-window-vscroll nil) ; reduces lag on holding scroll key
 
 ;; Load other files:
 (load "~/.emacs.d/packages.el")
