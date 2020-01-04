@@ -1,6 +1,6 @@
 ;; Set up (use-package).
 (setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
+      '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")
         ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
@@ -187,7 +187,7 @@
   (use-package emmet-mode
     :hook
     ((sgml-mode . emmet-mode) (css-mode . emmet-mode)))
-  (use-package company-web-html
+  (use-package company-web
     :hook
     ((web-mode-hook . (lambda ()
                         (set (make-local-variable 'company-backends) '(company-web-html))
