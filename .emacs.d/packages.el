@@ -193,12 +193,22 @@
                         (set (make-local-variable 'company-backends) '(company-web-html))
                         (company-mode t))))))
 
-(use-package json-mode
-  :mode ("\\.json\\'"))
 
 (use-package js2-mode
   :mode ("\\.js\\'" "\\.jsx\\'")
   :config
+  (setq js-indent-level 2)
+  (use-package typescript-mode
+    :config
+    (setq typescript-indent-level 2)
+    (use-package prettier-js
+      :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode))))
+  (use-package json-mode
+    :init
+    (add-hook 'json-mode-hook (lambda ()
+                                (make-local-variable 'js-indent-level)
+                                (setq js-indent-level 2)))
+    :mode ("\\.json\\'"))
   (use-package js2-refactor
     :hook (js2-mode . js2-refactor-mode))
   (setq js-switch-indent-offset js-indent-level))
@@ -214,6 +224,9 @@
 ;; LSP
 (use-package lsp-mode
   :commands lsp
+  :init (setq lsp-disabled-clients '(clojure-lsp)
+              gc-cons-threshold (* 100 1024 1024)
+              read-process-output-max (* 1024 1024))
   :hook (prog-mode . lsp))
 
 (use-package lsp-ui :commands lsp-ui-mode
@@ -221,10 +234,10 @@
     :config (setq lsp-ui-sideline-ignore-duplicate t))
 (use-package company-lsp :commands company-lsp
   :config
-  (push 'company-lsp company-backends)
   (setq company-lsp-async t
         company-lsp-cache-candidates 'auto
-        company-lsp-enable-recompletion t))
+        company-lsp-enable-recompletion t
+        lsp-prefer-capf t))
 (use-package toml-mode)
 
 (use-package rust-mode
@@ -263,7 +276,9 @@
 (use-package bbdb)
 (use-package org)
 (use-package markdown-mode)
-(use-package magit)
+(use-package magit
+  :config
+  (setq git-commit-fill-column 72))
 (use-package smex)
 (use-package idle-highlight-mode)
 

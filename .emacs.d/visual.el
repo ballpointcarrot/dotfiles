@@ -21,6 +21,10 @@
 
 (if 'scroll-bar-mode
     (scroll-bar-mode 0))
+
+(unless window-system
+  (setq evil-esc-delay 0))
+
 ;; GUI-based improvements
 (when window-system
   ;; font options:

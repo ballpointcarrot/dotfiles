@@ -1,13 +1,16 @@
 ;;; eshell.el --- Eshell definitions and customizations.
 ;;; Code:
 
+
 ;; set Eshell path.
-(let ((path (shell-command-to-string "source ~/.zshrc; echo -n $PATH")))
+(let ((path (with-output-to-string
+              (with-current-buffer
+                  standard-output (process-file shell-file-name nil '(t nil) nil shell-command-switch "source ~/.zshrc; echo -n $PATH")))))
   (setenv "PATH" path)
   (setq exec-path
-	(append
-	 (split-string-and-unquote path ":")
-	 exec-path)))
+        (append
+         (split-string-and-unquote path ":")
+         exec-path)))
 
 ;; don't modify the eshell buffer, jump to the bottom on input
 (setq eshell-scroll-to-bottom-on-input t)
@@ -23,14 +26,13 @@
 
 ;; anything use $PAGER should just write outright.
 (add-hook 'eshell-mode-hook
-	  (lambda ()
-	    (setenv "PAGER" "cat")))
+          (lambda ()
+            (setenv "PAGER" "cat")))
 
 ;; Run commands through 'visual' (closer to ANSI term)
 (add-hook 'eshell-mode-hook
-	  (lambda ()
-	    (add-to-list 'eshell-visual-commands "ssh")
-	    (add-to-list 'eshell-visual-commands "tail")))
+          (lambda ()
+            (add-to-list 'eshell-visual-commands "ssh")
+            (add-to-list 'eshell-visual-commands "tail")))
 
 ;;; End eshell.el
-
