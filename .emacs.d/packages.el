@@ -195,7 +195,7 @@
 
 
 (use-package js2-mode
-  :mode ("\\.js\\'" "\\.jsx\\'")
+  :mode ("\\.js\\'" "\\.jsx\\'" "\\.ts\\'" "\\.tsx\\'")
   :config
   (setq js-indent-level 2)
   (use-package typescript-mode
