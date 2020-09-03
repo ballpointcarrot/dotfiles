@@ -23,7 +23,13 @@
     (scroll-bar-mode 0))
 
 (unless window-system
-  (setq evil-esc-delay 0))
+  (setq evil-esc-delay 0)
+  (eval-after-load 'flycheck
+    '(progn
+       (set-face-attribute 'flycheck-error nil :background "red")
+       (set-face-attribute 'flycheck-warning nil :background "yellow" :foreground "red")
+       (set-face-attribute 'flycheck-info nil :background "yellow" :foreground "black")
+       )))
 
 ;; GUI-based improvements
 (when window-system

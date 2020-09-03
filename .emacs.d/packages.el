@@ -195,14 +195,9 @@
 
 
 (use-package js2-mode
-  :mode ("\\.js\\'" "\\.jsx\\'" "\\.ts\\'" "\\.tsx\\'")
+  :mode ("\\.js\\'" "\\.jsx\\'")
   :config
   (setq js-indent-level 2)
-  (use-package typescript-mode
-    :config
-    (setq typescript-indent-level 2)
-    (use-package prettier-js
-      :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode))))
   (use-package json-mode
     :init
     (add-hook 'json-mode-hook (lambda ()
@@ -212,6 +207,14 @@
   (use-package js2-refactor
     :hook (js2-mode . js2-refactor-mode))
   (setq js-switch-indent-offset js-indent-level))
+
+(use-package typescript-mode
+  :after js2-mode
+  :mode ("\\.ts\\'" "\\.tsx\\'")
+  :config
+  (setq typescript-indent-level 2)
+  (use-package prettier-js
+    :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode))))
 
 (use-package restclient
   :config (use-package company-restclient))
@@ -237,7 +240,7 @@
   (setq company-lsp-async t
         company-lsp-cache-candidates 'auto
         company-lsp-enable-recompletion t
-        lsp-prefer-capf t))
+        lsp-completion-provider :capf))
 (use-package toml-mode)
 
 (use-package rust-mode
@@ -257,13 +260,13 @@
 
 
 ;; Packages that make things pretty.
+(use-package all-the-icons)
 (use-package flatui-theme :no-require t)
 (use-package flatui-dark-theme :no-require t)
-(use-package kaolin-themes
+(use-package doom-themes
   :config
-  (use-package all-the-icons)
-  (load-theme 'kaolin-bubblegum t)
-  (kaolin-treemacs-theme))
+  (load-theme 'doom-laserwave t))
+(use-package kaolin-themes :no-require t)
 (use-package monokai-theme :no-require t)
 (use-package exotica-theme :no-require t)
 (use-package challenger-deep-theme :no-require t)

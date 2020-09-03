@@ -4,6 +4,9 @@
 (setq user-full-name "Christopher Kruse"
       user-mail-address "ckruse@ballpointcarrot.net")
 
+;; bump GC size (supposedly helps boot time and LSP):
+(setq gc-cons-threshold 16000000)
+
 ;; prefer 'y' or 'n' to 'yes' or 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
 
