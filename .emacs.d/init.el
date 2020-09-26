@@ -1,4 +1,6 @@
 ;;; init.el --- Emacs initialization
+;;; Commentary:
+;;; - I have nothing to say.
 ;;; Code:
 
 (setq user-full-name "Christopher Kruse"
@@ -11,9 +13,13 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Set up backup and auto-save file handling:
-(setq backup-by-copying t
-      backup-directory-alist `((".*" . ,temporary-file-directory))
-      auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(defconst emacs-temp-dir (expand-file-name (format "emacs-%d" (user-uid)) temporary-file-directory))
+(setq create-lockfiles nil
+      backup-by-copying t
+      backup-directory-alist `((".+" . ,emacs-temp-dir))
+      auto-save-file-name-transforms `((".+" ,emacs-temp-dir t))
+      auto-save-list-file-prefix emacs-temp-dir)
+
 (global-auto-revert-mode 1)
 
 ;; Fix indents (I HATE tabs...)

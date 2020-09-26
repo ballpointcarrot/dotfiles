@@ -38,6 +38,10 @@
   :config
   (smartparens-global-mode 1))
 
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package undo-tree
   :config
   (global-undo-tree-mode t))
@@ -58,8 +62,11 @@
   :config
   (use-package evil-surround
     :hook (prog-mode . evil-surround-mode))
+  (use-package origami
+    :hook (prog-mode . origami-mode))
   (evil-mode)
   (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit)
+  (define-key evil-normal-state-map (kbd ", h") 'evil-window-split)
   (define-key evil-normal-state-map (kbd "z f") 'origami-close-node)
   (define-key evil-normal-state-map (kbd "z o") 'origami-open-node))
 
@@ -104,8 +111,6 @@
   :hook
   ((lisp-mode . parinfer-mode) (emacs-lisp-mode . parinfer-mode)))
 
-(use-package origami :hook (prog-mode . origami-mode))
-
 (use-package avy
   :init
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)) ; Because Dvorak.
@@ -132,33 +137,36 @@
          ("C-x C-f" . counsel-find-file)
          ("C-c g" . counsel-git)
          ("C-c j" . counsel-git-grep)
-         ("C-c k" . counsel-ag)))
-
-(use-package exec-path-from-shell
-  :config
-  (exec-path-from-shell-initialize))
+         ("C-c k" . counsel-rg)))
 
 (use-package linum-relative
   :init
   (setq linum-relative-current-symbol "")
   :config
-  (linum-on))
+  (linum-on)
+  (linum-relative-global-mode t)
+  (column-number-mode t))
 
 ;; Programming-specific.
+
+(use-package magit
+  :config
+  (setq git-commit-fill-column 72)
+  (git-commit-turn-on-auto-fill))
 
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
 
-(use-package flycheck-pos-tip
+(use-package flycheck
+  :commands flycheck-mode
+  :hook (prog-mode . flycheck-mode)
   :config
-  (use-package flycheck
-    :commands flycheck-mode
-    :hook (prog-mode . flycheck-mode)
-    :config
-    (defalias 'flycheck-show-error-at-point-soon 'flycheck-show-error-at-point))
-  (flycheck-pos-tip-mode))
+  (defalias 'flycheck-show-error-at-point-soon 'flycheck-show-error-at-point)
+  (use-package flycheck-popup-tip
+    :hook
+    (flycheck-mode . flycheck-popup-tip-mode)))
 
 ;; Clojure
 (use-package clojure-mode
@@ -181,6 +189,7 @@
 (use-package clj-refactor)
 (use-package clojure-mode-extra-font-locking)
 
+;; JS/TS and Web
 (use-package web-mode
   :mode ("\\.html?\\'" "\\.erb\\'" "\\.mustache\\'")
   :config
@@ -192,7 +201,6 @@
     ((web-mode-hook . (lambda ()
                         (set (make-local-variable 'company-backends) '(company-web-html))
                         (company-mode t))))))
-
 
 (use-package js2-mode
   :mode ("\\.js\\'" "\\.jsx\\'")
@@ -211,18 +219,13 @@
 (use-package typescript-mode
   :after js2-mode
   :mode ("\\.ts\\'" "\\.tsx\\'")
-  :config
+  :init
   (setq typescript-indent-level 2)
   (use-package prettier-js
     :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode))))
 
 (use-package restclient
   :config (use-package company-restclient))
-
-(use-package yaml-mode)
-
-(use-package dockerfile-mode)
-(use-package docker-compose-mode)
 
 ;; LSP
 (use-package lsp-mode
@@ -235,12 +238,15 @@
 (use-package lsp-ui :commands lsp-ui-mode
     :hook (lsp-mode . lsp-ui-mode)
     :config (setq lsp-ui-sideline-ignore-duplicate t))
+
 (use-package company-lsp :commands company-lsp
   :config
   (setq company-lsp-async t
         company-lsp-cache-candidates 'auto
         company-lsp-enable-recompletion t
         lsp-completion-provider :capf))
+
+;; Rust things.
 (use-package toml-mode)
 
 (use-package rust-mode
@@ -258,6 +264,10 @@
     :hook
     (rust-mode . racer-mode))))
 
+;; It's cloud native! /s
+(use-package yaml-mode)
+(use-package dockerfile-mode)
+(use-package docker-compose-mode)
 
 ;; Packages that make things pretty.
 (use-package all-the-icons)
@@ -265,24 +275,25 @@
 (use-package flatui-dark-theme :no-require t)
 (use-package doom-themes
   :config
-  (load-theme 'doom-laserwave t))
+  (load-theme 'doom-monokai-pro t))
 (use-package kaolin-themes :no-require t)
 (use-package monokai-theme :no-require t)
 (use-package exotica-theme :no-require t)
 (use-package challenger-deep-theme :no-require t)
 (use-package leuven-theme :disabled)
 (use-package emojify)
-(use-package password-store)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode t)
+  :config (setq doom-modeline-height 14))
 
 ;; Packages not requiring configuration.
 (use-package circe)
 (use-package bbdb)
 (use-package org)
 (use-package markdown-mode)
-(use-package magit
-  :config
-  (setq git-commit-fill-column 72))
-(use-package smex)
+(use-package password-store)
 (use-package idle-highlight-mode)
 
 (provide 'packages)
