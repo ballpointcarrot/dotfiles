@@ -147,6 +147,28 @@
   (linum-relative-global-mode t)
   (column-number-mode t))
 
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (setq treemacs-width 20)
+  :bind
+  (:map evil-normal-state-map
+        ("\\" . treemacs)))
+
+(use-package treemacs-evil
+  :after evil treemacs
+  :ensure t)
+
+(use-package persp-mode
+  :config
+  (persp-mode))
+
+(use-package treemacs-persp
+  :after treemacs persp-mode
+  :ensure t
+  :config (treemacs-set-scope-type 'Perspectives))
+
 ;; Programming-specific.
 
 (use-package magit
@@ -271,6 +293,9 @@
 
 ;; Packages that make things pretty.
 (use-package all-the-icons)
+(use-package treemacs-all-the-icons
+  :after treemacs all-the-icons)
+
 (use-package flatui-theme :no-require t)
 (use-package flatui-dark-theme :no-require t)
 (use-package doom-themes
