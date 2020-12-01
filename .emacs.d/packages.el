@@ -271,20 +271,11 @@
 ;; Rust things.
 (use-package toml-mode)
 
-(use-package rust-mode
+(use-package rustic
   :config
   (use-package cargo
     :hook
-    (rust-mode . cargo-minor-mode))
-  (use-package flycheck-rust
-    :init
-    (with-eval-after-load 'rust-mode
-      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
-  (use-package company-racer
-   :config
-   (use-package racer
-    :hook
-    (rust-mode . racer-mode))))
+    (rust-mode . cargo-minor-mode)))
 
 ;; It's cloud native! /s
 (use-package yaml-mode)
