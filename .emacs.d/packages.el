@@ -20,15 +20,6 @@
 (setq use-package-verbose t
       use-package-always-ensure t)
 
-;; Extend package selection to anywhere you can fetch source
-;; via the Quelpa tool:
-(use-package quelpa
-  :init
-  (quelpa '(quelpa-use-package)
-          :fetcher "git"
-          :url "https://github.com/quelpa/quelpa-use-package.git")
-  (require 'quelpa-use-package))
-
 ;; Packages which make my environment useful.
 
 (use-package ido-vertical-mode
@@ -251,47 +242,37 @@
   :after js2-mode
   :mode ("\\.ts\\'" "\\.tsx\\'")
   :init
-  (setq typescript-indent-level 2))
-
-(use-package prettier-js
-    :after typescript-mode
-    :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode)))
-
-(use-package add-node-modules-path
-  :hook (js2-mode typescript-mode))
+  (setq typescript-indent-level 2)
+  (use-package prettier-js
+    :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode))))
 
 (use-package restclient
   :config (use-package company-restclient))
 
 ;; LSP
-(use-package eglot
-  :ensure t)
+(use-package lsp-mode
+  :commands lsp
+  :init (setq lsp-disabled-clients '(clojure-lsp)
+              gc-cons-threshold (* 100 1024 1024)
+              read-process-output-max (* 1024 1024))
+  :hook (prog-mode . lsp))
 
-;; (use-package lsp-mode
-;;   :commands lsp
-;;   :init (setq lsp-disabled-clients '(clojure-lsp)
-;;               gc-cons-threshold (* 100 1024 1024)
-;;               read-process-output-max (* 1024 1024))
-;;   :hook (prog-mode . lsp))
+(use-package lsp-ui :commands lsp-ui-mode
+    :hook (lsp-mode . lsp-ui-mode)
+    :config (setq lsp-ui-sideline-ignore-duplicate t))
 
-;; (use-package lsp-ui :commands lsp-ui-mode
-;;     :hook (lsp-mode . lsp-ui-mode)
-;;     :config (setq lsp-ui-sideline-ignore-duplicate t))
-
-;; (use-package company-lsp :commands company-lsp
-;;   :config
-;;   (setq company-lsp-async t
-;;         company-lsp-cache-candidates 'auto
-;;         company-lsp-enable-recompletion t
-;;         lsp-completion-provider :capf))
+(use-package company-lsp :commands company-lsp
+  :config
+  (setq company-lsp-async t
+        company-lsp-cache-candidates 'auto
+        company-lsp-enable-recompletion t
+        lsp-completion-provider :capf))
 
 ;; Rust things.
 (use-package toml-mode)
 
 (use-package rustic
   :config
-  (setq rustic-lsp-client 'eglot)
-  (add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1)))
   (use-package cargo
     :hook
     (rust-mode . cargo-minor-mode)))
