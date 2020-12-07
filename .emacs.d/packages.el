@@ -272,10 +272,13 @@
 (use-package toml-mode)
 
 (use-package rustic
+  :mode ("\\.rs\\'" . rustic-mode)
   :config
   (use-package cargo
     :hook
-    (rust-mode . cargo-minor-mode)))
+    (rust-mode . cargo-minor-mode))
+  (setq lsp-ui-doc-enable nil
+        rustic-lsp-server 'rust-analyzer))
 
 ;; It's cloud native! /s
 (use-package yaml-mode)
