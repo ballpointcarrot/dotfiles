@@ -52,13 +52,15 @@
 
 (use-package evil
   :ensure t
+  :after undo-tree
   :init
   (setq evil-search-module 'evil-search
         evil-ex-complete-emacs-commands nil
         evil-vsplit-window-right t
         evil-split-window-below t
         evil-shift-round nil
-        evil-want-C-u-scroll t)
+        evil-want-C-u-scroll t
+        evil-undo-system 'undo-tree)
   :config
   (use-package evil-surround
     :hook (prog-mode . evil-surround-mode))
@@ -241,10 +243,13 @@
 (use-package typescript-mode
   :after js2-mode
   :mode ("\\.ts\\'" "\\.tsx\\'")
-  :init
-  (setq typescript-indent-level 2)
-  (use-package prettier-js
-    :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode))))
+  :config
+  (setq typescript-indent-level 2))
+
+
+(use-package prettier-js
+  :after typescript-mode
+  :hook ((js2-mode . prettier-js-mode) (typescript-mode . prettier-js-mode)))
 
 (use-package restclient
   :config (use-package company-restclient))
