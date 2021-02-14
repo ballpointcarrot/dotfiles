@@ -3,7 +3,7 @@ echo "= ballpointcarrot's  Dotfiles ="
 echo "==============================="
 
 dir=$HOME/.dotfiles
-cd $HOME
+cd "$HOME" || exit
 
 if [ -z "$(/usr/bin/which git)" ]; then
     echo "Please install git before continuing."
@@ -11,36 +11,42 @@ if [ -z "$(/usr/bin/which git)" ]; then
 fi
 
 printf "\nCloning dotfiles..."
-git clone https://github.com/ballpointcarrot/dotfiles.git $dir
-
-#printf "\n\nInstalling Oh My ZSH...\n"
-#curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh > /dev/null 2>&1
+git clone https://github.com/ballpointcarrot/dotfiles.git "$dir"
 
 printf "\n\nInstalling ZPrezto...\n"
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-cp $dir/zpreztorc $HOME/.zpreztorc
+cp "$dir/zpreztorc" "$HOME/.zpreztorc"
 
 printf "\n\nCloning vim config..."
-if [ -d $HOME/.vim ]; then
+if [ -d "$HOME/.vim" ]; then
     echo "First, backing up existing vim config."
-    if [ -d $HOME/.vim_backup ]; then
-        rm -rf $HOME/.vim_backup
+    if [ -d "$HOME/.vim_backup" ]; then
+        rm -rf "$HOME/.vim_backup"
     fi
-    mv $HOME/.vim $HOME/.vim_backup
-    mv $HOME/.vimrc $HOME/.vim_backup/vimrc_backup
+    mv "$HOME/.vim" "$HOME/.vim_backup"
+    mv "$HOME/.vimrc" "$HOME/.vim_backup/vimrc_backup"
 fi
 
 printf "\n\nInstalling Emacs configuration..."
-if [ -d $HOME/.emacs.d ]; then
+if [ -d "$HOME/.emacs.d" ]; then
     echo "Back up existing Emacs config."
-    if [ -d $HOME/.emacs.d.backup ]; then
-        rm -rf $HOME/.emacs.d.backup
+    if [ -d "$HOME/.emacs.d.backup" ]; then
+        rm -rf "$HOME/.emacs.d.backup"
     fi
 
-    mv $HOME/.emacs.d $HOME/.emacs.d.backup
-    mkdir $HOME/.emacs.d
-    ln -s $dir/.emacs.d/* $HOME/.emacs.d/
+    mv "$HOME/.emacs.d" "$HOME/.emacs.d.backup"
+    mkdir "$HOME/.emacs.d"
 fi
+
+# install Doom Emacs
+git clone --depth=1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+
+# Copy Doom local configuration
+ln -s "$dir/.doom.d" "$HOME/.doom.d"
+
+# Install Doom Emacs
+~/.emacs.d/bin/doom install
+
 
 printf "\n\nInstalling ballpointcarrot's vim config..."
 git clone https://github.com/ballpointcarrot/vim-config.git $HOME/.vim > /dev/null 2>&1
