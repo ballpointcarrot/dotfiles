@@ -1,20 +1,34 @@
 [user]
-	name = Christopher Kruse
-	email = ckruse@ballpointcarrot.net
+    name = Christopher Kruse
+    email = ckruse@ballpointcarrot.net
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+    diff = auto
+    status = auto
+    branch = auto
 [core]
-	editor = nano
-	autocrlf = input
+    editor = emacsclient
+    autocrlf = input
+    excludesfile = /Users/christopherkruse/.gitignore
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%Cgreen%h%Creset %ad | %s%d %Cblue[%an]%Creset \" --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%Cgreen%h%Creset %ad | %s%d %Cblue[%an]%Creset \" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
 [push]
-	default = current
+    default = current
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[github]
+    user = ballpointcarrot
+# [commit]
+#     gpgsign = true
+[pull]
+    ff = only
+[remote]
+    prune = true
