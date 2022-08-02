@@ -25,18 +25,18 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-monokai-pro)
+(setq doom-theme 'doom-Iosvkem)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (after! org
- (setq org-directory "~/org/"
-       org-default-notes-file (concat org-directory "/in.org")
-       org-todo-keywords `((sequence "TODO(t)" "DOING(i)" "BLOCKED(b)" "|" "DONE(d)" "DROPPED(x)"))
-       org-todo-keyword-faces
-       '(("DOING" . "yellow")
-         ("BLOCKED" . (:foreground "red" :weight bold))))
- )
+  (setq org-directory "~/org/"
+        org-default-notes-file (concat org-directory "/notes.org")
+        org-todo-keywords `((sequence "TODO(t)" "DOING(i)" "BLOCKED(b)" "|" "DONE(d)" "DROPPED(x)"))
+        org-todo-keyword-faces
+        '(("DOING" . "yellow")
+          ("BLOCKED" . (:foreground "red" :weight bold))))
+  )
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
