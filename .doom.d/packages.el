@@ -52,3 +52,6 @@
 ;(unpin! t)
 
 (package! prettier-js)
+(package! org-present)
+(package! cue-mode)
+(package! catppuccin :recipe (:host github :repo "catppuccin/emacs"))

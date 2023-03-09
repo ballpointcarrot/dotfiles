@@ -22,10 +22,16 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
+(setq doom-font (font-spec :family "monospace" :name "InconsolataLGC Nerd Font Mono" :size 12 :weight 'normal)
+      ;; doom-variable-pitch-font (font-spec :family "sans" :size 10)
+      doom-big-font (font-spec :family "monospace" :name "SpaceMono Nerd Font" :size 24 :weight 'normal))
+
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-Iosvkem)
+(setq doom-theme 'catppuccin
+      catpuccin-flavor 'macchiato)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
