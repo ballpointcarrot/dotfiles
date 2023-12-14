@@ -22,7 +22,7 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-(setq doom-font (font-spec :family "monospace" :name "InconsolataLGC Nerd Font Mono" :size 12 :weight 'normal)
+(setq doom-font (font-spec :family "monospace" :name "Lilex Nerd Font" :size 13 :weight 'normal)
       ;; doom-variable-pitch-font (font-spec :family "sans" :size 10)
       doom-big-font (font-spec :family "monospace" :name "SpaceMono Nerd Font" :size 24 :weight 'normal))
 
@@ -32,6 +32,9 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'catppuccin
       catpuccin-flavor 'macchiato)
+
+;; Set a POSIX shell so that fish doesn't cause issues with doom/emacs
+;; (setq shell-file-name (executable-find "bash"))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
