@@ -4,7 +4,7 @@
 mkdir -p ~/.config
 
 # install starship for that statusline bling
-curl -sS https://starship.rs/install.sh | sh -- --yes
+curl -sS https://starship.rs/install.sh | sh -s -- --yes
 
 # Copy editor configurations
 cp -R .config/helix ~/.config/
