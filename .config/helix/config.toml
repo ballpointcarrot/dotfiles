@@ -1,0 +1,15 @@
+theme = "catppuccin_mocha"
+
+[editor]
+bufferline = "multiple"
+cursorline = true
+color-modes = true
+
+[editor.statusline]
+mode.normal = "N"
+mode.insert = "+"
+mode.select = "V"
+
+[keys.normal]
+C-r = "redo"
+C-g = "keep_primary_selection"
