@@ -6,7 +6,7 @@
     status = auto
     branch = auto
 [core]
-    editor = emacsclient
+	editor = hx
     autocrlf = input
     excludesfile = /Users/christopherkruse/.gitignore
 [alias]
