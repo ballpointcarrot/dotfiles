@@ -4,7 +4,10 @@
 mkdir -p ~/.config
 
 # install starship for that statusline bling
-curl -sS https://starship.rs/install.sh | sh -s -- --yes
+if [ -n $(which starship) ]; then
+  # assume using Bash in a docker context
+  echo 'eval "$(starship init bash)"' > ~/.bashrc
+fi
 
 # Copy editor configurations
 cp -R .config/helix ~/.config/
