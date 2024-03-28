@@ -9,6 +9,12 @@ if [ -n $(which starship) ]; then
   echo 'eval "$(starship init bash)"' > ~/.bashrc
 fi
 
+if [ -n $(which brew) ]; then
+  cp Brewfile ~/.Brewfile
+  brew bundle
+fi
+
+
 # Copy editor configurations
 cp -R .config/helix ~/.config/
 
