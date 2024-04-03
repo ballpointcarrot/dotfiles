@@ -11,7 +11,7 @@ fi
 
 if [ -n $(which brew) ]; then
   cp Brewfile ~/.Brewfile
-  brew bundle
+  brew bundle --global
 fi
 
 
