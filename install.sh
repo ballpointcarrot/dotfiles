@@ -22,10 +22,13 @@ fi
 # install starship for that statusline bling
 # execute after brew, as it's probably installing starship :)
 if [ -n "$(which starship)" ]; then
-  # assume using Bash in a docker context
-  echo 'eval "$(starship init bash)"' >> ~/.bashrc
+  echo 'eval "$(starship init bash)"' >> ~/.profile
 fi
 
+# install zoxide shell actions
+if [ -n "$(which zoxide)" ]; then
+  echo 'eval "$(zoxide init bash)"' >> ~/.profile
+fi
 # Copy editor configurations
 cp -R .config/helix ~/.config/
 
