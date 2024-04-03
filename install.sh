@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -exuo pipefail
+
 # Ensure XDG config directory is present
 mkdir -p ~/.config
 
