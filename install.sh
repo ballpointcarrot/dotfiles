@@ -23,7 +23,7 @@ fi
 # execute after brew, as it's probably installing starship :)
 if [ -n "$(which starship)" ]; then
   # assume using Bash in a docker context
-  echo 'eval "$(starship init bash)"' > ~/.bashrc
+  echo 'eval "$(starship init bash)"' >> ~/.bashrc
 fi
 
 # Copy editor configurations
