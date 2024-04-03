@@ -6,16 +6,15 @@ set -ex
 mkdir -p ~/.config
 
 # install starship for that statusline bling
-if [ -n $(which starship) ]; then
+if [ -n "$(which starship)" ]; then
   # assume using Bash in a docker context
   echo 'eval "$(starship init bash)"' > ~/.bashrc
 fi
 
-if [ -n $(which brew) ]; then
+if [ -n "$(which brew)" ]; then
   cp Brewfile ~/.Brewfile
   brew bundle --global
 fi
-
 
 # Copy editor configurations
 cp -R .config/helix ~/.config/
