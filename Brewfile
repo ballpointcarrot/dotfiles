@@ -1,15 +1,15 @@
 tap "homebrew/cask"
 
 # All the fancy rust CLI tools
+brew "starship"
 brew "bandwhich"
 brew "bat"
 brew "bottom"
+brew "broot"
 brew "dust"
 brew "eza"
 brew "fd"
 brew "ripgrep"
-brew "starship"
-brew "zoxide"
 brew "zellij"
 
 # Editors
