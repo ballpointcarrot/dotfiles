@@ -4,6 +4,7 @@ theme = "catppuccin_mocha"
 bufferline = "multiple"
 cursorline = true
 color-modes = true
+true-color = true # If it's wrong, then we'll have a bigger problem to deal with
 
 [editor.statusline]
 mode.normal = "N"
